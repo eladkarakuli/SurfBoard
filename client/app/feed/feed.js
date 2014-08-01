@@ -15,25 +15,26 @@ angular.module('surfBoardApp')
       var GoogleApi = function() {
         this.items = [];
         this.busy = false;
-        this.after = '';
+        this.resultSize = parseInt(attrs.resultSize) || 5;
+        this.resultIndex = 0;
       };
 
       GoogleApi.prototype.nextPage = function() {
         if (this.busy) return;
         this.busy = true;
-
-        var url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=surf%20quets" + this.after + "&callback=JSON_CALLBACK";
+        
+        var url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=surf%20quets&imgsz=large&rsz=" + this.resultSize + "&start=" + this.resultIndex + "&callback=JSON_CALLBACK";
         $http.jsonp(url).success(function(data) {
           var items = data.responseData.results;
           for (var i = 0; i < items.length; i++) {
             this.items.push(items[i].url);
           }
-          this.after = "t3_" + this.items[this.items.length - 1].url;
+          this.resultIndex += this.resultSize;
           this.busy = false;
         }.bind(this)).
         error(function(data, status, headers, config) {
           scope.error = true;
-          console.log(data);
+          console.log(data);  
         });;
       };
 
