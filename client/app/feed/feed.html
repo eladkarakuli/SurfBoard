@@ -1,0 +1,15 @@
+<div ng-controller='feedController'>
+  <div infinite-scroll='googleapi.nextPage()' infinite-scroll-disabled='googleapi.busy' infinite-scroll-distance='1'>
+    <div ng-repeat='item in googleapi.items'>
+      <span class='score'>{{item.score}}</span>
+      <span class='title'>
+        <img ng-src="{{item}}"/>
+      </span>
+      <small>by {{item.author}} -
+        <a ng-href='http://googleapi.com{{item.permalink}}' target='_blank'>{{item.num_comments}} comments</a>
+      </small>
+      <div style='clear: both;'></div>
+    </div>
+    <div ng-show='googleapi.busy'>Loading data...</div>
+  </div>
+</div>
