@@ -1,9 +1,8 @@
-<div ng-controller='feedController'>
+<div>
   <div infinite-scroll='googleapi.nextPage()' infinite-scroll-disabled='googleapi.busy' infinite-scroll-distance='1'>
     <div ng-repeat='item in googleapi.items'>
-      <span class='score'>{{item.score}}</span>
-      <span class='title'>
-        <img ng-src="{{item}}"/>
+      <span class='title' >
+        <img ng-src="{{item}}" class="img-thumbnail img-responsive"/>
       </span>
       <small>by {{item.author}} -
         <a ng-href='http://googleapi.com{{item.permalink}}' target='_blank'>{{item.num_comments}} comments</a>

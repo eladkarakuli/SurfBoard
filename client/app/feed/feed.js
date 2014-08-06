@@ -1,11 +1,6 @@
 'use strict';
 
 angular.module('surfBoardApp')
-.controller('feedController', ['$scope', function($scope, GoogleApi) {
- /* $scope.googleapi = new GoogleApi();*/
-}])
-
-// GoogleApi constructor function to encapsulate HTTP and pagination logic
 .directive('googleApiFeed', function($http) {
   return {
     restrict: 'E',
@@ -35,7 +30,7 @@ angular.module('surfBoardApp')
         error(function(data, status, headers, config) {
           scope.error = true;
           console.log(data);  
-        });;
+        });
       };
 
       scope.googleapi = new GoogleApi();
